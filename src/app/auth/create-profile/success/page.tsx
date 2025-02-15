@@ -1,14 +1,9 @@
 'use client';
-
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
-type VerifyEmailSentPageProps = {
-  message?: string;
-};
-
-export default function VerifyEmailSentPage({ message = "User created. Please verify your email." }: VerifyEmailSentPageProps) {
+export default function ProfileCreatedPage() {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-pink-100">
       <div className="min-h-screen flex flex-col justify-center items-center px-6">
@@ -18,18 +13,18 @@ export default function VerifyEmailSentPage({ message = "User created. Please ve
           </div>
           <div className="space-y-2">
             <h1 className="text-2xl font-bold text-gray-900">
-              Account Created Successfully!
+              Profile Created Successfully!
             </h1>
             <p className="text-sm text-gray-600">
-              Check your email to verify your account
+              Your profile has been set up and you're ready to start matching
             </p>
           </div>
           <Button
             asChild
             className="w-full h-12 bg-[#FF6B6B] hover:bg-[#ff5252]"
           >
-            <Link href="/auth/create-profile">
-              Next
+            <Link href="/dashboard">
+              Go to Dashboard
             </Link>
           </Button>
         </div>

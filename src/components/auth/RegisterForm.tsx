@@ -26,13 +26,16 @@ export function RegisterForm() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password }),
             });
-
+        
             const data = await response.json();
-
+            console.log(data);
+            
+        
             if (!response.ok) {
                 throw new Error(data.message || 'Registration failed');
             }
-
+        
+            localStorage.setItem('token', data.token);
             router.push('/auth/verify-email-sent');
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Registration failed');
