@@ -24,7 +24,7 @@ export function LoginForm() {
         try {
             const response = await authService.login({ email, password });
             localStorage.setItem('token', response.token);
-            router.push('/dashboard');
+            router.push('/auth/dashboard');
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Login failed');
         } finally {

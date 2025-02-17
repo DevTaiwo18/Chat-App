@@ -23,7 +23,7 @@ export default function ProfileCreatedPage() {
             asChild
             className="w-full h-12 bg-[#FF6B6B] hover:bg-[#ff5252]"
           >
-            <Link href="/dashboard">
+            <Link href="/auth/dashboard">
               Go to Dashboard
             </Link>
           </Button>

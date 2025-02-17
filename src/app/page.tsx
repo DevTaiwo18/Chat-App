@@ -1,7 +1,32 @@
+'use client';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 
 export default function HomePage() {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      router.push('/auth/dashboard');
+    } else {
+      setShouldRender(true);
+    }
+    setIsLoading(false);
+  }, [router]);
+
+  if (isLoading) {
+    return null; 
+  }
+
+  if (!shouldRender) {
+    return null;
+  }
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white via-pink-50 to-pink-100 p-8">
       <div className="w-full max-w-md text-center space-y-12">

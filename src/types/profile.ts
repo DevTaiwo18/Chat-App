@@ -72,3 +72,8 @@ export interface ProfileResponse extends ProfileData {
     createdAt: string;
     updatedAt: string;
 }
+
+export interface Location {
+    type: string;
+    coordinates: number[];
+}
