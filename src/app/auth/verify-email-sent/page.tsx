@@ -4,36 +4,36 @@ import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 
-export default function VerifyEmailSentPage() {
+function VerifyEmailContent() {
   const searchParams = useSearchParams();
   const message = searchParams.get('message') || "User created. Please verify your email.";
-
+  
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-pink-100">
-      <div className="min-h-screen flex flex-col justify-center items-center px-6">
-        <div className="w-full max-w-md text-center space-y-6">
-          <div className="bg-white/60 h-20 w-20 rounded-full flex items-center justify-center mx-auto">
-            <CheckCircle className="h-10 w-10 text-green-500" />
-          </div>
-          <div className="space-y-2">
-            <h1 className="text-2xl font-bold text-gray-900">
-              Account Created Successfully!
-            </h1>
-            <p className="text-sm text-gray-600">
-              Check your email to verify your account
-            </p>
-          </div>
-          <Button
-            asChild
-            className="w-full h-12 bg-[#FF6B6B] hover:bg-[#ff5252]"
-          >
-            <Link href="/auth/create-profile">
-              Next
-            </Link>
-          </Button>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
+      <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
+        <div className="flex flex-col items-center space-y-2 text-center">
+          <CheckCircle className="w-16 h-16 text-green-500" />
+          <h1 className="text-2xl font-bold">
+            Account Created Successfully!
+          </h1>
+          <p className="text-gray-500">
+            Check your email to verify your account
+          </p>
         </div>
+        <Link href="/auth/signin" className="w-full">
+          <Button className="w-full">Next</Button>
+        </Link>
       </div>
-    </main>
+    </div>
+  );
+}
+
+export default function VerifyEmailSentPage() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
