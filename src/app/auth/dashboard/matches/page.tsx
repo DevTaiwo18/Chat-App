@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
@@ -24,7 +24,7 @@ const InitialsAvatar = ({ name, className }: { name: string, className: string }
     );
 };
 
-export default function MatchesPage() {
+function MatchesPageContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [matches, setMatches] = useState<MatchResponse[]>([]);
@@ -186,5 +186,13 @@ export default function MatchesPage() {
                 </div>
             )}
         </div>
+    );
+}
+
+export default function MatchesPage() {
+    return (
+        <Suspense fallback={<div className="flex justify-center p-8"><div className="w-10 h-10 border-4 border-[#FF6B6B] border-t-transparent rounded-full animate-spin"></div></div>}>
+            <MatchesPageContent />
+        </Suspense>
     );
 }
