@@ -1,6 +1,6 @@
 import { Profile, ProfileResponse } from '@/types/profile';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-bp8q.onrender.com';
 
 class ApiError extends Error {
     constructor(public message: string, public statusCode?: number) {

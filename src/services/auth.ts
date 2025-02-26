@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://chat-app-api-bp8q.onrender.com';
 
 export const authService = {
     async login(credentials: { email: string; password: string }) {

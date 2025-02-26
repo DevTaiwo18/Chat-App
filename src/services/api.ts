@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-bp8q.onrender.com';
 
 export async function fetchApi<T>(
     endpoint: string,
