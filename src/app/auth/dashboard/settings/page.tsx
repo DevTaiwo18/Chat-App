@@ -1,21 +1,19 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { profileService } from '@/services/profileService';
 import type { ProfileResponse, Location } from '@/types/profile';
-import { User, ArrowLeft, MapPin, Camera, Loader2, CheckCircle2 } from 'lucide-react';
+import { User, ArrowLeft, MapPin, Loader2, CheckCircle2 } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
 export default function SettingsPage() {
     const router = useRouter();
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const [mounted, setMounted] = useState(false);
     const [profile, setProfile] = useState<ProfileResponse | null>(null);
     const [originalProfile, setOriginalProfile] = useState<ProfileResponse | null>(null);
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
-    const [uploading, setUploading] = useState(false);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState(false);
     const [locationStatus, setLocationStatus] = useState<string>('');
@@ -25,7 +23,6 @@ export default function SettingsPage() {
         loadProfile();
     }, []);
 
-    // Reset success message after 3 seconds
     useEffect(() => {
         let timeout: NodeJS.Timeout;
         if (success) {
@@ -123,32 +120,6 @@ export default function SettingsPage() {
         }
     };
 
-    const handlePictureUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0];
-        if (!file) return;
-
-        setUploading(true);
-        setSuccess(false);
-        try {
-            const result = await profileService.uploadProfilePicture(file);
-            setProfile(prev => {
-                if (!prev) return null;
-                return {
-                    ...prev,
-                    profilePicture: result.profilePicture + '?v=' + new Date().getTime() // Add cache-busting
-                };
-            });
-        } catch (err) {
-            setError(err instanceof Error ? err.message : 'Failed to upload picture');
-        } finally {
-            setUploading(false);
-            // Reset the file input
-            if (fileInputRef.current) {
-                fileInputRef.current.value = '';
-            }
-        }
-    };
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!hasChanges()) return; // Prevent unnecessary API calls
@@ -210,44 +181,20 @@ export default function SettingsPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="max-w-md mx-auto px-4 py-8 space-y-6">
-                {/* Profile Picture */}
+                {/* Profile Picture Display (non-interactive) */}
                 <div className="flex flex-col items-center space-y-4">
-                    <div className="relative h-32 w-32 group">
-                        <div className={`relative h-full w-full rounded-full overflow-hidden ${uploading ? 'opacity-50' : ''}`}>
-                            {profile.profilePicture ? (
-                                <img
-                                    src={profile.profilePicture}
-                                    alt="Profile"
-                                    className="h-full w-full object-cover"
-                                />
-                            ) : (
-                                <div className="h-full w-full bg-gray-200 flex items-center justify-center">
-                                    <User className="h-12 w-12 text-gray-400" />
-                                </div>
-                            )}
-                        </div>
-
-                        <button
-                            type="button"
-                            onClick={() => fileInputRef.current?.click()}
-                            className="absolute bottom-0 right-0 bg-[#ff5252] text-white p-2 rounded-full 
-                       hover:bg-[#ff3333] transition-colors duration-200"
-                            disabled={uploading}
-                        >
-                            {uploading ? (
-                                <Loader2 className="h-5 w-5 animate-spin" />
-                            ) : (
-                                <Camera className="h-5 w-5" />
-                            )}
-                        </button>
-
-                        <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept="image/*"
-                            onChange={handlePictureUpload}
-                            className="hidden"
-                        />
+                    <div className="h-32 w-32 rounded-full overflow-hidden">
+                        {profile.profilePicture ? (
+                            <img
+                                src={profile.profilePicture}
+                                alt="Profile"
+                                className="h-full w-full object-cover"
+                            />
+                        ) : (
+                            <div className="h-full w-full bg-gray-200 flex items-center justify-center">
+                                <User className="h-12 w-12 text-gray-400" />
+                            </div>
+                        )}
                     </div>
                 </div>
 

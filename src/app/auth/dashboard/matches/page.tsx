@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { matchService } from '@/services/matchService';
 import { MatchResponse } from '@/types/match';
 
-// Initial avatar component for users without profile pictures
 const InitialsAvatar = ({ name, className }: { name: string, className: string }) => {
     const initials = name
         ? name
@@ -34,7 +33,6 @@ export default function MatchesPage() {
     const [notification, setNotification] = useState<{message: string, type: string} | null>(null);
 
     useEffect(() => {
-        // Handle incoming like action from email links
         const action = searchParams.get('action');
         const userId = searchParams.get('userId');
         
@@ -57,7 +55,6 @@ export default function MatchesPage() {
                     message: "It's a match! You can now start chatting.", 
                     type: 'success' 
                 });
-                // Refresh the matches list to include the new match
                 await fetchMatches();
             } else {
                 setNotification({ 
@@ -67,7 +64,6 @@ export default function MatchesPage() {
                 fetchMatches();
             }
             
-            // Clear the URL parameters after processing
             window.history.replaceState({}, '', '/auth/dashboard/matches');
         } catch (error) {
             console.error('Error processing like action:', error);
@@ -155,7 +151,7 @@ export default function MatchesPage() {
                 <div className="space-y-4 overflow-y-auto max-h-[70vh] pr-2">
                     {matches.map((match) => (
                         <Link
-                            href={`/messages/${match.matchId}`}
+                            href={`/auth/dashboard/messages/${match.matchId}`}
                             key={match.matchId}
                             className="flex items-center p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow block"
                         >
