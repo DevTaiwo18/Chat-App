@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'https://chat-app-api-bp8q.onrender.com/:path*', 
+        destination: 'https://chat-app-api-4srj.onrender.com/:path*', 
       },
     ];
   },
