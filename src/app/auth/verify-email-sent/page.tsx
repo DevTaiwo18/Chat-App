@@ -12,7 +12,7 @@ function VerifyEmailContent() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 space-y-4 bg-white">
         <div className="flex flex-col items-center space-y-2 text-center">
           <CheckCircle className="w-16 h-16" style={{ color: '#FF6B6B' }} />
           <h1 className="text-2xl font-bold">
@@ -22,7 +22,7 @@ function VerifyEmailContent() {
             Check your email to verify your account
           </p>
         </div>
-        <Link href="/auth/signin" className="w-full">
+        <Link href="/auth/create-profile" className="w-full">
           <Button className="w-full" style={{ backgroundColor: '#FF6B6B', borderColor: '#FF6B6B' }}>Next</Button>
         </Link>
       </div>
