@@ -3,12 +3,12 @@
 import { Button } from '@/components/ui/button';
 import { CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-type VerifyEmailSentPageProps = {
-  message?: string;
-};
+export default function VerifyEmailSentPage() {
+  const searchParams = useSearchParams();
+  const message = searchParams.get('message') || "User created. Please verify your email.";
 
-export default function VerifyEmailSentPage({ message = "User created. Please verify your email." }: VerifyEmailSentPageProps) {
   return (
     <main className="min-h-screen bg-gradient-to-b from-white via-pink-50 to-pink-100">
       <div className="min-h-screen flex flex-col justify-center items-center px-6">
