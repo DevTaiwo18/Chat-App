@@ -1,4 +1,4 @@
-const BASE_URL = 'https://chat-app-api-4srj.onrender.com';
+const BASE_URL = 'https://chat-app-api-4srj.onrender.com/api';
 
 export const authService = {
     async login(credentials: { email: string; password: string }) {

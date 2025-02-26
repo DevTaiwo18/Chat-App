@@ -1,6 +1,6 @@
 import { PotentialMatch, MatchResponse, UserAction, MatchActionResponse } from '@/types/match';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-4srj.onrender.com';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-4srj.onrender.com/api';
 
 class ApiError extends Error {
     constructor(public message: string, public statusCode?: number) {

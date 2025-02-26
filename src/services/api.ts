@@ -1,4 +1,4 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-4srj.onrender.com';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://chat-app-api-4srj.onrender.com/api';
 
 export async function fetchApi<T>(
     endpoint: string,
